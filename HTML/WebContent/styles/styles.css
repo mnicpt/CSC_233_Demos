@@ -1,0 +1,21 @@
+.mainContent {
+	width: 500px;
+	padding: 15px;
+	box-sizing: border-box;
+}
+
+.row {
+	height: 50px;
+}
+
+.label {
+	width: 55%;
+	float: left;
+	display: inline;
+}
+
+.input {
+	float: left;
+	width: 45%;
+	display: inline;
+}
