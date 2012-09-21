@@ -10,7 +10,7 @@
 </head>
 <body>
 
-Hi, ${firstName}
+<jsp:useBean id="customer" class="edu.hcc.csci233.beans.Customer" scope="session" />
 
 </body>
 </html>

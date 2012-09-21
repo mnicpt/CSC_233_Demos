@@ -1,12 +1,16 @@
 package edu.hcc.csci233.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import edu.hcc.csci233.beans.Customer;
 
 /**
  * Servlet implementation class FirstServlet
@@ -27,8 +31,18 @@ public class FirstServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String firstName = request.getParameter("firstName");
-		request.getSession().setAttribute("firstName", firstName);
-		
+		Customer cust = new Customer();
+		cust.setFirstName(firstName);
+		request.getSession().setAttribute("customer", cust);
+//		
+//		PrintWriter writer = response.getWriter();
+//		Enumeration<String> headerNames = request.getHeaderNames();
+//		writer.println("<h1>Request Headers</h1>");
+//		while(headerNames.hasMoreElements()) {
+//			String name = headerNames.nextElement();
+//			writer.println(name +": "+ request.getHeader(name));
+//		}
+		response.setContentType("text/html");
 		response.sendRedirect("result.jsp");
 	}
 
