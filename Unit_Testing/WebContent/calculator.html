@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Calculator</title>
+<style>
+	*{
+		box-sizing:border-box;
+		margin:0;
+		padding:0;
+		border:0;
+		font-family:sans-serif;
+		font-size:1em;
+	}
+	div::after {
+		display:table;
+		line-height:0;
+		content:"";
+	}
+	body{
+		padding-top:150px;
+		width:200px;
+		margin:0 auto;
+	}
+	.calculator {
+		width:200px;
+		height:265px;
+		border:3px solid orange;
+		border-radius:5px;
+		background:-webkit-linear-gradient(top, #fff, #eee);
+		padding:10px;
+	}
+	.btn {
+		display:inline-block;
+		float:left;
+		width:20.5%;
+		height:36px;
+		border:1px solid #aaa;
+		border-radius:2px;
+		box-shadow:0 1px 1px #ccc;
+		margin-top:10px;
+		margin-right:6%;
+		cursor:pointer;
+	}
+	.btn:last-child {
+		margin-right:0;
+	}
+	.btn p {
+		padding:8px;
+		text-align:center;
+	}
+	.screen {
+		height:45px;
+		border:1px solid #777;
+		box-shadow:inset 0 1px 2px #ddd;
+	}
+	.screen p {
+		text-align: right;
+		padding: 14px;
+	}
+	.screen + div > .btn {
+		margin-top:20px;
+	}
+</style>
+</head>
+<body>
+
+	<div class="calculator">
+		<div class="screen">
+			<p>0</p>
+		</div>
+		<div>
+			<div class="btn"><p>7</p></div>
+			<div class="btn"><p>8</p></div>
+			<div class="btn"><p>9</p></div>
+			<div class="btn"><p>*</p></div>
+		</div>
+		<div>
+			<div class="btn"><p>4</p></div>
+			<div class="btn"><p>5</p></div>
+			<div class="btn"><p>6</p></div>
+			<div class="btn"><p>/</p></div>
+		</div>
+		<div>
+			<div class="btn"><p>1</p></div>
+			<div class="btn"><p>2</p></div>
+			<div class="btn"><p>3</p></div>
+			<div class="btn"><p>-</p></div>
+		</div>
+		<div>
+			<div class="btn"><p>C</p></div>
+			<div class="btn"><p>0</p></div>
+			<div class="btn"><p>=</p></div>
+			<div class="btn"><p>+</p></div>
+		</div>
+	</div>
+
+</body>
+</html>

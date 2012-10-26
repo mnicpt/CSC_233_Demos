@@ -2,13 +2,14 @@ package edu.hcc.csci233.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import edu.hcc.csci233.beans.Customer;
 
@@ -33,7 +34,8 @@ public class FirstServlet extends HttpServlet {
 		String firstName = request.getParameter("firstName");
 		Customer cust = new Customer();
 		cust.setFirstName(firstName);
-		request.getSession().setAttribute("customer", cust);
+		HttpSession session = request.getSession();
+		session.setAttribute("customer", cust);
 //		
 //		PrintWriter writer = response.getWriter();
 //		Enumeration<String> headerNames = request.getHeaderNames();
@@ -42,8 +44,21 @@ public class FirstServlet extends HttpServlet {
 //			String name = headerNames.nextElement();
 //			writer.println(name +": "+ request.getHeader(name));
 //		}
-		response.setContentType("text/html");
-		response.sendRedirect("result.jsp");
+		PrintWriter writer = response.getWriter();
+		writer.println("Session id: " +session.getId());
+		Cookie[] cookies = request.getCookies();
+		
+		for(Cookie cookie : cookies) {
+			writer.println("Name: " +cookie.getName()); 
+			writer.println("Value: " +cookie.getValue());
+		}
+		//request.getRequestDispatcher("page").forward(request, response);
+		Cookie cookie = new Cookie("firstName",firstName);
+		cookie.setComment("This is the first name.");
+		response.addCookie(cookie);
+		
+//		response.setContentType("text/html");
+//		response.sendRedirect("result.jsp");
 	}
 
 }
