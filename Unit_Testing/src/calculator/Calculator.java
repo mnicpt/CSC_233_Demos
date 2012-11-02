@@ -3,13 +3,16 @@
  */
 package calculator;
 
+import java.io.Serializable;
 import java.util.Stack;
 
 /**
  * @author smask
  *
  */
-public class Calculator {
+public class Calculator implements Serializable{
+
+	private static final long serialVersionUID = -9219489523716397746L;
 
 	private Stack<String> operands;
 	
@@ -71,6 +74,7 @@ public class Calculator {
 
 	public int clear() {
 		operands = new Stack<String>();
+		setDisplayValue("0");
 		return 0;
 	}
 

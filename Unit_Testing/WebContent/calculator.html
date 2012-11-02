@@ -31,6 +31,7 @@
 		padding:10px;
 	}
 	.btn {
+		background:-webkit-linear-gradient(top, #efefef, #ddd);
 		display:inline-block;
 		float:left;
 		width:20.5%;
@@ -41,22 +42,22 @@
 		margin-top:10px;
 		margin-right:6%;
 		cursor:pointer;
+		padding:8px;
+		text-align:center;
+	}
+	.btn:hover {
+		background:-webkit-linear-gradient(top, #ddd, #efefef);
 	}
 	.btn:last-child {
 		margin-right:0;
-	}
-	.btn p {
-		padding:8px;
-		text-align:center;
 	}
 	.screen {
 		height:45px;
 		border:1px solid #777;
 		box-shadow:inset 0 1px 2px #ddd;
-	}
-	.screen p {
 		text-align: right;
-		padding: 14px;
+		padding: 10px;
+		width: 100%;
 	}
 	.screen + div > .btn {
 		margin-top:20px;
@@ -64,36 +65,67 @@
 </style>
 </head>
 <body>
-
-	<div class="calculator">
-		<div class="screen">
-			<p>0</p>
+	<form method="post" action="#">
+		<div class="calculator">
+			<div>
+				<input id="display" name="display" type="text" class="screen" value="0" readonly="readonly" />
+			</div>
+			<div>
+				<input type="button" class="btn" data-number="7" value="7" />
+				<input type="button" class="btn" data-number="8" value="8" />
+				<input type="button" class="btn" data-number="9" value="9" />
+				<input name="operator" type="button" class="btn" value="*" />
+			</div>
+			<div>
+				<input type="button" class="btn" data-number="4" value="4" />
+				<input type="button" class="btn" data-number="5" value="5" />
+				<input type="button" class="btn" data-number="6" value="6" />
+				<input name="operator" type="button" class="btn" value="/" />
+			</div>
+			<div>
+				<input type="button" class="btn" data-number="1" value="1" />
+				<input type="button" class="btn" data-number="2" value="2" />
+				<input type="button" class="btn" data-number="3" value="3" />
+				<input name="operator" type="button" class="btn" value="-" />
+			</div>
+			<div>
+				<input name="operator" type="button" class="btn" value="C" />
+				<input type="button" class="btn" data-number="0" value="0" />
+				<input id="Enter" name="operator" type="button" class="btn" value="&#8629;" />
+				<input name="operator" type="button" class="btn" value="+" />
+			</div>
 		</div>
-		<div>
-			<div class="btn"><p>7</p></div>
-			<div class="btn"><p>8</p></div>
-			<div class="btn"><p>9</p></div>
-			<div class="btn"><p>*</p></div>
-		</div>
-		<div>
-			<div class="btn"><p>4</p></div>
-			<div class="btn"><p>5</p></div>
-			<div class="btn"><p>6</p></div>
-			<div class="btn"><p>/</p></div>
-		</div>
-		<div>
-			<div class="btn"><p>1</p></div>
-			<div class="btn"><p>2</p></div>
-			<div class="btn"><p>3</p></div>
-			<div class="btn"><p>-</p></div>
-		</div>
-		<div>
-			<div class="btn"><p>C</p></div>
-			<div class="btn"><p>0</p></div>
-			<div class="btn"><p>=</p></div>
-			<div class="btn"><p>+</p></div>
-		</div>
-	</div>
-
+	</form>
+	
+	<script  type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+	</script>
+	<script>
+		/* Attach click event to number keys */
+		$("input[data-number]").on("click", function(e){
+			var $input = $("input[name='display']");
+			var inputVal = $input.val();
+			if(inputVal == "0") { 
+				inputVal = ""; //remove leading zero
+			}
+			$body = $("body");
+			if($body.hasClass("operator")) {
+				$body.removeClass("operator");
+				$input.val($(this).val());
+			} else {
+				$input.val(inputVal + $(this).val());
+			}
+		});
+		
+		$("input[name='operator']").on("click", function(){
+			$("body").addClass("operator");
+			$.ajax({
+			  url: "Calculator",
+			  data: {"operator" : $(this).val(), "display" : $("#display").val()}
+			}).done(function(data) { 
+			  $("#display").val(data);
+			});
+		});
+	</script>
+	
 </body>
 </html>
